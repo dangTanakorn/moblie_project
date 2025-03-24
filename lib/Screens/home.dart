@@ -19,10 +19,10 @@ class _homePageState extends State<homePage> {
   final JsonService jsonService = JsonService();
   final ScrollController _scrollController = ScrollController();
   User? user;
-  int userID = 2;
+  Plot? plot;
+  int userID = 1;
   double totelCredit = 0;
   double totelUnTrees = 0;
-  Plot? plot;
 
   void _changeIndex(int value) {
     setState(() {
@@ -47,6 +47,7 @@ class _homePageState extends State<homePage> {
 
   Future<void> loadUserPlots(int userId) async {
     List<Plot> plots = await jsonService.getPlotsByUser(userId);
+    print("Plots: ${plots.length}");
     setState(() {
       totelCredit = plots.fold(0, (sum, plot) => sum + plot.credit);
     });
@@ -54,6 +55,7 @@ class _homePageState extends State<homePage> {
 
   Future<void> loadUnTrees(int userId) async {
     List<Untrees> trees = await jsonService.getUnTreeByUser(userId);
+    print("UnTrees: ${trees.length}");
     setState(() {
       totelUnTrees = trees.fold(0, (sum, untree) => sum + untree.credit);
     });
@@ -61,6 +63,7 @@ class _homePageState extends State<homePage> {
 
   Future<void> loadUser(int userId) async {
     user = await jsonService.getUserById(userId);
+    print("User: ${user?.username}");
     setState(() {});
   }
 
