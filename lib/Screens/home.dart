@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/model/plot_model.dart';
 import 'package:projcetapp/model/untree_model.dart';
 import 'package:projcetapp/model/users_model.dart';
@@ -47,15 +48,21 @@ class _homePageState extends State<homePage> {
 
   Future<void> loadUserPlots(int userId) async {
     List<Plot> plots = await jsonService.getPlotsByUser(userId);
-    print("Plots: ${plots.length}");
+    double total = 0.0; // ตัวแปรรวมเครดิตทั้งหมด
+
+    for (var plot in plots) {
+      List<Tree> trees = await jsonService.getTreeByPlot(plot.pid);
+      double plotCredit = trees.fold(0, (sum, tree) => sum + tree.credit);
+      total += plotCredit; // บวกค่าเครดิตของแต่ละ plot
+    }
+
     setState(() {
-      totelCredit = plots.fold(0, (sum, plot) => sum + plot.credit);
+      totelCredit = total;
     });
   }
 
   Future<void> loadUnTrees(int userId) async {
     List<Untrees> trees = await jsonService.getUnTreeByUser(userId);
-    print("UnTrees: ${trees.length}");
     setState(() {
       totelUnTrees = trees.fold(0, (sum, untree) => sum + untree.credit);
     });
@@ -63,7 +70,6 @@ class _homePageState extends State<homePage> {
 
   Future<void> loadUser(int userId) async {
     user = await jsonService.getUserById(userId);
-    print("User: ${user?.username}");
     setState(() {});
   }
 

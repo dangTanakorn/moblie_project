@@ -17,6 +17,7 @@ class _PlotdatapageState extends State<Plotdatapage> {
   List<Tree> trees = [];
   Plot? plot;
   late int pid;
+  double totalCredit = 0;
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _PlotdatapageState extends State<Plotdatapage> {
 
   Future<void> loadTree(int plotId) async {
     List<Tree> tree = await jsonService.getTreeByPlot(plotId);
+    totalCredit = tree.fold(0, (sum, tree1) => sum + tree1.credit);
     setState(() {
       trees = tree;
     });
@@ -93,7 +95,7 @@ class _PlotdatapageState extends State<Plotdatapage> {
                               child: Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "คาร์บอนเครดิต : ${plot?.credit.toStringAsFixed(2)} tCO2eq",
+                                  "คาร์บอนเครดิต : ${totalCredit.toStringAsFixed(2)} tCO2eq",
                                   style: TextStyle(fontSize: 16),
                                 ),
                               )),

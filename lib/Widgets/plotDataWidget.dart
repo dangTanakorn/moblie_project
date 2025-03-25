@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/Screens/plotDataPage.dart';
 import 'package:projcetapp/model/plot_model.dart';
 import 'package:projcetapp/Services/json_service.dart';
@@ -14,6 +15,7 @@ class plotdata_Widget extends StatefulWidget {
 class _plotdata_WidgetState extends State<plotdata_Widget> {
   final JsonService jsonService = JsonService();
   List<Plot> userPlots = [];
+  List<double> plotCredits = [];
   late int uid;
   @override
   void initState() {
@@ -24,19 +26,29 @@ class _plotdata_WidgetState extends State<plotdata_Widget> {
 
   Future<void> loadUserPlots(int userId) async {
     List<Plot> plots = await jsonService.getPlotsByUser(userId);
+    List<double> credits = [];
+    for (var plot in plots) {
+      List<Tree> trees = await jsonService.getTreeByPlot(plot.pid);
+      double totalCredit = trees.fold(0, (sum, tree) => sum + tree.credit);
+      credits.add(totalCredit);
+    }
+
     setState(() {
       userPlots = plots;
+      plotCredits = credits;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    print("${plotCredits}");
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemCount: userPlots.length,
       itemBuilder: (context, index) {
         final item = userPlots[index];
+        final credit = plotCredits.isNotEmpty ? plotCredits[index] : 0.0;
         return Padding(
             padding: EdgeInsets.all(10),
             child: GestureDetector(
@@ -64,7 +76,7 @@ class _plotdata_WidgetState extends State<plotdata_Widget> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                          "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(2)} tCO2eq"),
+                          "คาร์บอนเครดิต : ${credit.toStringAsFixed(2)} tCO2eq"),
                       SizedBox(height: 5),
                     ],
                   ),
