@@ -17,6 +17,7 @@ class _plotdata_WidgetState extends State<plotdata_Widget> {
   List<Plot> userPlots = [];
   List<double> plotCredits = [];
   late int uid;
+
   @override
   void initState() {
     super.initState();
@@ -41,7 +42,6 @@ class _plotdata_WidgetState extends State<plotdata_Widget> {
 
   @override
   Widget build(BuildContext context) {
-    print("${plotCredits}");
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -50,7 +50,7 @@ class _plotdata_WidgetState extends State<plotdata_Widget> {
         final item = userPlots[index];
         final credit = plotCredits.isNotEmpty ? plotCredits[index] : 0.0;
         return Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.only(left: 10, right: 10, bottom: 5),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -65,18 +65,18 @@ class _plotdata_WidgetState extends State<plotdata_Widget> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(7),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${item.name}",
+                        "${index + 1} : " "${item.name}",
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 10),
                       Text(
-                          "คาร์บอนเครดิต : ${credit.toStringAsFixed(2)} tCO2eq"),
+                          "คาร์บอนเครดิต : ${credit.toStringAsFixed(3)} tCO2eq"),
                       SizedBox(height: 5),
                     ],
                   ),

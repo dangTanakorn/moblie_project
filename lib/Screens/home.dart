@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projcetapp/Model/tree_model.dart';
+import 'package:projcetapp/Widgets/SwipWidget.dart';
 import 'package:projcetapp/model/plot_model.dart';
-import 'package:projcetapp/model/untree_model.dart';
 import 'package:projcetapp/model/users_model.dart';
 import 'package:projcetapp/Widgets/plotDataWidget.dart';
 import 'package:projcetapp/Widgets/unTreesWidget.dart';
@@ -16,19 +15,15 @@ class homePage extends StatefulWidget {
 
 class _homePageState extends State<homePage> {
   int _index = 0;
-  int _selectedIndex = 0;
   final JsonService jsonService = JsonService();
   final ScrollController _scrollController = ScrollController();
   User? user;
   Plot? plot;
   int userID = 1;
-  double totelCredit = 0;
-  double totelUnTrees = 0;
 
   void _changeIndex(int value) {
     setState(() {
       _index = value;
-      _selectedIndex = value;
     });
     _scrollController.jumpTo(0);
   }
@@ -37,35 +32,6 @@ class _homePageState extends State<homePage> {
   void initState() {
     super.initState();
     loadUser(userID);
-    loadUserPlots(userID);
-    loadUnTrees(userID);
-  }
-
-  Future<void> loadPlot(int plotId) async {
-    plot = await jsonService.getPlotByPid(plotId);
-    setState(() {});
-  }
-
-  Future<void> loadUserPlots(int userId) async {
-    List<Plot> plots = await jsonService.getPlotsByUser(userId);
-    double total = 0.0; // ตัวแปรรวมเครดิตทั้งหมด
-
-    for (var plot in plots) {
-      List<Tree> trees = await jsonService.getTreeByPlot(plot.pid);
-      double plotCredit = trees.fold(0, (sum, tree) => sum + tree.credit);
-      total += plotCredit; // บวกค่าเครดิตของแต่ละ plot
-    }
-
-    setState(() {
-      totelCredit = total;
-    });
-  }
-
-  Future<void> loadUnTrees(int userId) async {
-    List<Untrees> trees = await jsonService.getUnTreeByUser(userId);
-    setState(() {
-      totelUnTrees = trees.fold(0, (sum, untree) => sum + untree.credit);
-    });
   }
 
   Future<void> loadUser(int userId) async {
@@ -90,8 +56,9 @@ class _homePageState extends State<homePage> {
         Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 40),
+              padding: EdgeInsets.only(top: 0),
               child: Container(
+                height: 80,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
                   Colors.transparent,
@@ -101,14 +68,13 @@ class _homePageState extends State<homePage> {
                 child: Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 10),
+                      padding: EdgeInsets.only(left: 10, top: 30),
                       child: Container(
                           width: (MediaQuery.of(context).size.width * 0.5) - 10,
                           height: 60,
                           alignment: Alignment.bottomLeft,
                           child: Image.asset(
                             'assets/images/logo.png',
-                            fit: BoxFit.contain,
                           )),
                     ),
                     Container(
@@ -116,76 +82,29 @@ class _homePageState extends State<homePage> {
                         height: 60,
                         alignment: Alignment.bottomRight,
                         child: Padding(
-                          padding: EdgeInsets.only(right: 20, bottom: 5),
+                          padding: EdgeInsets.only(right: 20),
                           child: Text(
                             "${user?.fristname} ${user?.lastname}",
                             style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 18),
+                                fontWeight: FontWeight.w900, fontSize: 14),
                           ),
                         )),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          spreadRadius: 0,
-                          blurRadius: 10,
-                          offset: Offset(5, 5))
-                    ]),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Text(
-                        "คาร์บอนเครดิต",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                              "แปลงทั้งหมด : ${totelCredit.toStringAsFixed(2)} tCO2eq"),
-                        )),
-                    Padding(
-                        padding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                              "ต้นเดี่ยวทั้งหมด : ${totelUnTrees.toStringAsFixed(2)} tCO2eq"),
-                        )),
-                  ],
+            Swip_Widget(uid: userID),
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: buildButton(0, "แปลงทั้งหมด"),
                 ),
-              ),
-            ),
-            Container(
-              height: 60,
-              color: Colors.transparent,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(5),
-                    child: buildButton(0, "แปลงทั้งหมด"),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(5),
-                    child: buildButton(1, "ต้นไม้นอกแปลง"),
-                  )
-                ],
-              ),
+                Padding(
+                  padding: EdgeInsets.all(5),
+                  child: buildButton(1, "ต้นไม้นอกแปลง"),
+                )
+              ],
             ),
             Expanded(
                 child: SingleChildScrollView(
@@ -212,7 +131,7 @@ class _homePageState extends State<homePage> {
   }
 
   Widget buildButton(int index, String text) {
-    bool isSelected = _selectedIndex == index;
+    bool isSelected = _index == index;
     return Expanded(
       child: Container(
         color: Colors.transparent,

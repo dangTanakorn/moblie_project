@@ -95,8 +95,8 @@ class _PlotdatapageState extends State<Plotdatapage> {
                               child: Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "คาร์บอนเครดิต : ${totalCredit.toStringAsFixed(2)} tCO2eq",
-                                  style: TextStyle(fontSize: 16),
+                                  "คาร์บอนเครดิต : ${totalCredit.toStringAsFixed(3)} tCO2eq",
+                                  style: TextStyle(fontSize: 14),
                                 ),
                               )),
                         ],
@@ -168,6 +168,7 @@ class _PlotdatapageState extends State<Plotdatapage> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
+                                                      "${index + 1} : "
                                                       "${item.name}",
                                                       style: TextStyle(
                                                           fontSize: 18,
@@ -176,7 +177,7 @@ class _PlotdatapageState extends State<Plotdatapage> {
                                                     ),
                                                     SizedBox(height: 10),
                                                     Text(
-                                                        "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(2)} tCO2eq"),
+                                                        "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(3)} tCO2eq"),
                                                     SizedBox(height: 5),
                                                   ],
                                                 ),

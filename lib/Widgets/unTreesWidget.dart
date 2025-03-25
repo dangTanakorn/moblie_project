@@ -39,7 +39,7 @@ class _UnTrees_WidggetState extends State<UnTrees_Widget> {
       itemBuilder: (context, index) {
         final item = userTrees[index];
         return Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.only(left: 10, right: 10, bottom: 5),
             child: GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -53,18 +53,18 @@ class _UnTrees_WidggetState extends State<UnTrees_Widget> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${item.name}",
+                        "${index + 1} : " "${item.name}",
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 10),
                       Text(
-                          "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(2)} tCO2eq"),
+                          "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(3)} tCO2eq"),
                       SizedBox(height: 5),
                     ],
                   ),
