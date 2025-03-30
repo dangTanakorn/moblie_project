@@ -81,14 +81,14 @@ class _CardCredit_WidgetState extends State<CardCredit_Widget> {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                      "แปลงทั้งหมด : ${totelCredit.toStringAsFixed(3)} tCO2eq"),
+                      "แปลงทั้งหมด : ${totelCredit.toStringAsFixed(2)}  tCO2eq"),
                 )),
             Padding(
                 padding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                      "ต้นเดี่ยวทั้งหมด : ${totelUnTrees.toStringAsFixed(3)} tCO2eq"),
+                      "ต้นเดี่ยวทั้งหมด : ${totelUnTrees.toStringAsFixed(2)}  tCO2eq"),
                 )),
           ],
         ),

@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/Services/json_service.dart';
-import 'package:projcetapp/model/untree_model.dart';
 
-class UnTreeData extends StatefulWidget {
-  final int utid;
-  const UnTreeData({super.key, required this.utid});
+class TreesData extends StatefulWidget {
+  final int tid;
+  const TreesData({super.key, required this.tid});
 
   @override
-  State<UnTreeData> createState() => _UnTreeDataState();
+  State<TreesData> createState() => _TreesDataState();
 }
 
-class _UnTreeDataState extends State<UnTreeData> {
+class _TreesDataState extends State<TreesData> {
   final JsonService jsonService = JsonService();
-  Untrees? tree;
-  late int utid;
-
+  Tree? tree;
+  late int tid;
   @override
   void initState() {
     super.initState();
-
-    utid = widget.utid;
-    loadTree(utid);
+    tid = widget.tid;
+    loadTree(tid);
   }
 
-  Future<void> loadTree(int unTreeId) async {
-    tree = await jsonService.getUnTreeByUtid(unTreeId);
+  Future<void> loadTree(int treeId) async {
+    tree = await jsonService.getTreeByTid(treeId);
     setState(() {});
   }
 

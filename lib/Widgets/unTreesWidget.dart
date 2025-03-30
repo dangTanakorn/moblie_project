@@ -53,7 +53,7 @@ class _UnTrees_WidggetState extends State<UnTrees_Widget> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(7),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -64,7 +64,7 @@ class _UnTrees_WidggetState extends State<UnTrees_Widget> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                          "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(3)} tCO2eq"),
+                          "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(2)} tCO2eq"),
                       SizedBox(height: 5),
                     ],
                   ),

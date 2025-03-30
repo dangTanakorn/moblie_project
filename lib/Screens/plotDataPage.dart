@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projcetapp/Model/tree_model.dart';
+import 'package:projcetapp/Screens/TreesData.dart';
 import 'package:projcetapp/model/plot_model.dart';
 import 'package:projcetapp/Services/json_service.dart';
 
@@ -154,7 +155,15 @@ class _PlotdatapageState extends State<Plotdatapage> {
                                         return Padding(
                                           padding: EdgeInsets.all(10),
                                           child: GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          TreesData(
+                                                              tid: trees[index]
+                                                                  .tid)));
+                                            },
                                             child: Card(
                                               elevation: 5,
                                               shape: RoundedRectangleBorder(

@@ -76,7 +76,7 @@ class _plotdata_WidgetState extends State<plotdata_Widget> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                          "คาร์บอนเครดิต : ${credit.toStringAsFixed(3)} tCO2eq"),
+                          "คาร์บอนเครดิต : ${credit.toStringAsFixed(2)} tCO2eq"),
                       SizedBox(height: 5),
                     ],
                   ),
