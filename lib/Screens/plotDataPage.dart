@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projcetapp/Model/tree_model.dart';
-import 'package:projcetapp/Screens/TreesData.dart';
+import 'package:projcetapp/Screens/editPlot.dart';
+import 'package:projcetapp/Screens/treeData.dart';
 import 'package:projcetapp/model/plot_model.dart';
 import 'package:projcetapp/Services/json_service.dart';
 
@@ -83,13 +84,22 @@ class _PlotdatapageState extends State<Plotdatapage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(5),
-                            child: Text(
-                              "${plot?.name}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 24),
-                            ),
-                          ),
+                              padding: EdgeInsets.all(5),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditPlot(pid: pid)));
+                                },
+                                child: Text(
+                                  "${plot?.name}",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24),
+                                ),
+                              )),
                           Padding(
                               padding:
                                   EdgeInsets.only(top: 3, left: 20, bottom: 10),

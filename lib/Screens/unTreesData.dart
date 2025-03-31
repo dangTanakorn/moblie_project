@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Screens/editUnTree.dart';
 import 'package:projcetapp/Services/json_service.dart';
 import 'package:projcetapp/model/untree_model.dart';
 
@@ -170,33 +171,33 @@ class _UnTreeDataState extends State<UnTreeData> {
                       ),
                     ),
                     Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 60, vertical: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: 60,
-                              width: 150,
-                              color: Colors.blue,
-                              alignment: Alignment.center,
-                              child: Text(
-                                "แก้ไขข้อมูล",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            Container(
-                              height: 60,
-                              width: 150,
-                              color: Colors.blue,
-                              alignment: Alignment.center,
-                              child: Text(
-                                "แก้ไขตำแหน่ง",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          ],
-                        ))
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 60, vertical: 10),
+                      child: Container(
+                        height: 50,
+                        alignment: Alignment.center,
+                        child: FilledButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditUnTree(utid: utid)));
+                          },
+                          child: Text(
+                            "แก้ไขข้อมูล",
+                            style: TextStyle(fontSize: 24, color: Colors.black),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side:
+                                    BorderSide(color: Colors.black, width: 2)),
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
