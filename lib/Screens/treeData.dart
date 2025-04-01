@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Model/group_model.dart';
 import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/Screens/editTree.dart';
-import 'package:projcetapp/Screens/home.dart';
 import 'package:projcetapp/Screens/plotDataPage.dart';
 import 'package:projcetapp/Services/json_service.dart';
 
@@ -16,7 +16,9 @@ class TreesData extends StatefulWidget {
 class _TreesDataState extends State<TreesData> {
   final JsonService jsonService = JsonService();
   Tree? tree;
+  Group? group;
   late int tid;
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,13 @@ class _TreesDataState extends State<TreesData> {
 
   Future<void> loadTree(int treeId) async {
     tree = await jsonService.getTreeByTid(treeId);
+    loadGroup(tree!.id);
+    setState(() {});
+  }
+
+  Future<void> loadGroup(int groupId) async {
+    group = await jsonService.getGroupById(groupId);
+    print("${group?.name}");
     setState(() {});
   }
 
@@ -35,7 +44,7 @@ class _TreesDataState extends State<TreesData> {
         appBar: AppBar(
           toolbarHeight: 50,
           centerTitle: true,
-          title: Text("ข้อมูลต้นไม้"),
+          title: Text("${group?.name}"),
           leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);

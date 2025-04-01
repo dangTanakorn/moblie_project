@@ -65,11 +65,12 @@ class _EditUnTreeState extends State<EditUnTree> {
                     color: Colors.white.withOpacity(0.5)),
                 width: MediaQuery.of(context).size.width,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsets.all(5),
                       child: Container(
-                          width: 150,
+                          width: MediaQuery.of(context).size.width - 100,
                           height: 60,
                           decoration: BoxDecoration(
                               border: Border(
@@ -88,7 +89,7 @@ class _EditUnTreeState extends State<EditUnTree> {
                     Padding(
                       padding: EdgeInsets.all(2),
                       child: Container(
-                          width: 200,
+                          width: MediaQuery.of(context).size.width - 100,
                           height: 50,
                           decoration: BoxDecoration(
                               border: Border(
@@ -107,7 +108,7 @@ class _EditUnTreeState extends State<EditUnTree> {
                     Padding(
                       padding: EdgeInsets.all(2),
                       child: Container(
-                          width: 200,
+                          width: MediaQuery.of(context).size.width - 100,
                           height: 50,
                           decoration: BoxDecoration(
                               border: Border(
@@ -124,50 +125,10 @@ class _EditUnTreeState extends State<EditUnTree> {
                           )),
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                      child: Container(
-                        width: 100,
-                        height: 30,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                          width: 4,
-                          color: Colors.black,
-                        ))),
-                        child: Text(
-                          "อายุ : ${tree?.age} ปี",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: 30,
-                        alignment: Alignment.topCenter,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                          width: 4,
-                          color: Colors.black,
-                        ))),
-                        child: Text(
-                          "คาร์บอนเครดิต : ${tree?.credit}  tCO2eq",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    Padding(
                       padding: EdgeInsets.all(5),
                       child: Container(
                         height: 250,
-                        width: MediaQuery.of(context).size.width - 100,
+                        width: MediaQuery.of(context).size.width - 50,
                         color: Colors.amber,
                         alignment: Alignment.center,
                         child: Text(

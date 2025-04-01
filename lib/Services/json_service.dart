@@ -5,6 +5,7 @@ import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/model/plot_model.dart';
 import 'package:projcetapp/model/untree_model.dart';
 import 'package:projcetapp/model/users_model.dart';
+import 'package:projcetapp/Model/group_model.dart';
 
 class JsonService {
   Future<Map<String, dynamic>> loadJson() async {
@@ -79,5 +80,19 @@ class JsonService {
   Future<Untrees?> getUnTreeByUtid(int unTreeId) async {
     List<Untrees> allTrees = await getUnTrees();
     return allTrees.firstWhere((tree) => tree.utid == unTreeId);
+  }
+
+  //Group
+
+  Future<List<Group>> getGroup() async {
+    Map<String, dynamic> jsonData = await loadJson();
+    return (jsonData['group'] as List)
+        .map((group) => Group.fromJson(group))
+        .toList();
+  }
+
+  Future<Group?> getGroupById(int GroupId) async {
+    List<Group> allGroup = await getGroup();
+    return allGroup.firstWhere((Group) => Group.id == GroupId);
   }
 }

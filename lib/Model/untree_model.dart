@@ -1,6 +1,7 @@
 class Untrees {
   final int utid;
   final int uid;
+  final int id;
   final String name;
   final double circumference;
   final double height;
@@ -10,6 +11,7 @@ class Untrees {
   Untrees(
       {required this.utid,
       required this.uid,
+      required this.id,
       required this.name,
       required this.circumference,
       required this.height,
@@ -20,6 +22,7 @@ class Untrees {
     return Untrees(
         utid: json['utid'],
         uid: json['uid'],
+        id: json['id'],
         name: json['name'],
         circumference: json['circumference'],
         height: json['height'],

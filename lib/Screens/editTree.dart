@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Model/group_model.dart';
 import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/Screens/home.dart';
-import 'package:projcetapp/Screens/plotDataPage.dart';
 import 'package:projcetapp/Screens/treeData.dart';
 import 'package:projcetapp/Services/json_service.dart';
 
@@ -20,20 +20,32 @@ class _EditTreeState extends State<EditTree> {
   final TextEditingController _heightController = TextEditingController();
 
   Tree? tree;
+  List<Group> groups = [];
   late int tid;
+  String? selectedValue;
+
   @override
   void initState() {
     super.initState();
     tid = widget.tid;
+    loadGroup();
     loadTree(tid);
   }
 
   Future<void> loadTree(int treeId) async {
     tree = await jsonService.getTreeByTid(treeId);
+    loadGroup();
     setState(() {
       _nameController.text = tree?.name ?? "";
       _cirController.text = tree?.circumference.toString() ?? "";
       _heightController.text = tree?.height.toString() ?? "";
+    });
+  }
+
+  Future<void> loadGroup() async {
+    List<Group> group = await jsonService.getGroup();
+    setState(() {
+      groups = group;
     });
   }
 
@@ -70,11 +82,13 @@ class _EditTreeState extends State<EditTree> {
                     color: Colors.white.withOpacity(0.5)),
                 width: MediaQuery.of(context).size.width,
                 child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: EdgeInsets.all(5),
                       child: Container(
-                          width: 150,
+                          width: MediaQuery.of(context).size.width - 100,
                           height: 60,
                           decoration: BoxDecoration(
                               border: Border(
@@ -90,10 +104,11 @@ class _EditTreeState extends State<EditTree> {
                             style: TextStyle(fontSize: 28),
                           )),
                     ),
+                    Padding(padding: EdgeInsets.all(2), child: Container()),
                     Padding(
                       padding: EdgeInsets.all(2),
                       child: Container(
-                          width: 200,
+                          width: MediaQuery.of(context).size.width - 100,
                           height: 50,
                           decoration: BoxDecoration(
                               border: Border(
@@ -112,7 +127,7 @@ class _EditTreeState extends State<EditTree> {
                     Padding(
                       padding: EdgeInsets.all(2),
                       child: Container(
-                          width: 200,
+                          width: MediaQuery.of(context).size.width - 100,
                           height: 50,
                           decoration: BoxDecoration(
                               border: Border(
@@ -129,50 +144,10 @@ class _EditTreeState extends State<EditTree> {
                           )),
                     ),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                      child: Container(
-                        width: 100,
-                        height: 30,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                          width: 4,
-                          color: Colors.black,
-                        ))),
-                        child: Text(
-                          "อายุ : ${tree?.age} ปี",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: 30,
-                        alignment: Alignment.topCenter,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                          width: 4,
-                          color: Colors.black,
-                        ))),
-                        child: Text(
-                          "คาร์บอนเครดิต : ${tree?.credit}  tCO2eq",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                    Padding(
                       padding: EdgeInsets.all(5),
                       child: Container(
                         height: 250,
-                        width: MediaQuery.of(context).size.width - 100,
+                        width: MediaQuery.of(context).size.width - 50,
                         color: Colors.amber,
                         alignment: Alignment.center,
                         child: Text(

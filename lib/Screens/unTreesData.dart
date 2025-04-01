@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Model/group_model.dart';
 import 'package:projcetapp/Screens/editUnTree.dart';
 import 'package:projcetapp/Screens/home.dart';
 import 'package:projcetapp/Services/json_service.dart';
@@ -15,6 +16,7 @@ class UnTreeData extends StatefulWidget {
 class _UnTreeDataState extends State<UnTreeData> {
   final JsonService jsonService = JsonService();
   Untrees? tree;
+  Group? group;
   late int utid;
 
   @override
@@ -22,11 +24,19 @@ class _UnTreeDataState extends State<UnTreeData> {
     super.initState();
 
     utid = widget.utid;
+
     loadTree(utid);
   }
 
   Future<void> loadTree(int unTreeId) async {
     tree = await jsonService.getUnTreeByUtid(unTreeId);
+    loadGroup(tree!.id);
+    setState(() {});
+  }
+
+  Future<void> loadGroup(int groupId) async {
+    group = await jsonService.getGroupById(groupId);
+    print("${group?.name}");
     setState(() {});
   }
 
@@ -36,7 +46,7 @@ class _UnTreeDataState extends State<UnTreeData> {
         appBar: AppBar(
           toolbarHeight: 50,
           centerTitle: true,
-          title: Text("ข้อมูลต้นไม้"),
+          title: Text("${group?.name}"),
           leading: IconButton(
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
@@ -68,24 +78,25 @@ class _UnTreeDataState extends State<UnTreeData> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Container(
-                        width: 100,
-                        height: 50,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                          width: 4,
-                          color: Colors.black,
-                        ))),
-                        child: Text(
-                          "${tree?.name}",
-                          style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
+                        padding: EdgeInsets.all(10),
+                        child: Expanded(
+                          child: Container(
+                            width: 100,
+                            height: 50,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                              width: 4,
+                              color: Colors.black,
+                            ))),
+                            child: Text(
+                              "${tree?.name}",
+                              style: TextStyle(
+                                  fontSize: 28, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        )),
                     Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
