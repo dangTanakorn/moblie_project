@@ -67,10 +67,10 @@ class _EditUnTreeState extends State<EditUnTree> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(5),
                       child: Container(
                           width: 150,
-                          height: 50,
+                          height: 60,
                           decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -86,10 +86,10 @@ class _EditUnTreeState extends State<EditUnTree> {
                           )),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(2),
                       child: Container(
                           width: 200,
-                          height: 40,
+                          height: 50,
                           decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -105,10 +105,10 @@ class _EditUnTreeState extends State<EditUnTree> {
                           )),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(2),
                       child: Container(
                           width: 200,
-                          height: 40,
+                          height: 50,
                           decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -145,9 +145,9 @@ class _EditUnTreeState extends State<EditUnTree> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Container(
-                        width: 250,
+                        width: MediaQuery.of(context).size.width * 0.8,
                         height: 30,
                         alignment: Alignment.topCenter,
                         decoration: BoxDecoration(
@@ -159,7 +159,7 @@ class _EditUnTreeState extends State<EditUnTree> {
                         child: Text(
                           "คาร์บอนเครดิต : ${tree?.credit}  tCO2eq",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -177,13 +177,14 @@ class _EditUnTreeState extends State<EditUnTree> {
                       ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
+                          padding:
+                              EdgeInsets.only(top: 10, bottom: 10, left: 10),
                           child: Container(
                             height: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
                             alignment: Alignment.center,
                             child: FilledButton(
                               onPressed: () {
@@ -197,7 +198,7 @@ class _EditUnTreeState extends State<EditUnTree> {
                               child: Text(
                                 "ยกเลิกการแก้ไข",
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.black),
+                                    fontSize: 12, color: Colors.black),
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
@@ -210,10 +211,11 @@ class _EditUnTreeState extends State<EditUnTree> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
+                          padding:
+                              EdgeInsets.only(top: 10, bottom: 10, right: 10),
                           child: Container(
                             height: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
                             alignment: Alignment.center,
                             child: FilledButton(
                               onPressed: () {
@@ -226,7 +228,7 @@ class _EditUnTreeState extends State<EditUnTree> {
                               child: Text(
                                 "บันทึกข้อมูล",
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.black),
+                                    fontSize: 12, color: Colors.black),
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,

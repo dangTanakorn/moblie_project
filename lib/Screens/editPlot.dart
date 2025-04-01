@@ -65,8 +65,8 @@ class _EditPlotState extends State<EditPlot> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Container(
-                          width: 150,
-                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: 70,
                           decoration: BoxDecoration(
                               border: Border(
                                   bottom: BorderSide(
@@ -97,10 +97,10 @@ class _EditPlotState extends State<EditPlot> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
+                          padding: EdgeInsets.only(top: 5, bottom: 5, left: 10),
                           child: Container(
                             height: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
                             alignment: Alignment.center,
                             child: FilledButton(
                               onPressed: () {
@@ -114,7 +114,7 @@ class _EditPlotState extends State<EditPlot> {
                               child: Text(
                                 "ยกเลิกการแก้ไข",
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.black),
+                                    fontSize: 12, color: Colors.black),
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
@@ -127,10 +127,10 @@ class _EditPlotState extends State<EditPlot> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
+                          padding: EdgeInsets.only(top: 5, bottom: 5, left: 10),
                           child: Container(
                             height: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
                             alignment: Alignment.center,
                             child: FilledButton(
                               onPressed: () {
@@ -143,7 +143,7 @@ class _EditPlotState extends State<EditPlot> {
                               child: Text(
                                 "บันทึกข้อมูล",
                                 style: TextStyle(
-                                    fontSize: 18, color: Colors.black),
+                                    fontSize: 12, color: Colors.black),
                               ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,

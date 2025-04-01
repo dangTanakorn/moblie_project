@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/Screens/editTree.dart';
+import 'package:projcetapp/Screens/home.dart';
+import 'package:projcetapp/Screens/plotDataPage.dart';
 import 'package:projcetapp/Services/json_service.dart';
 
 class TreesData extends StatefulWidget {
@@ -34,6 +36,15 @@ class _TreesDataState extends State<TreesData> {
           toolbarHeight: 50,
           centerTitle: true,
           title: Text("ข้อมูลต้นไม้"),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Plotdatapage(pid: tree?.pid)));
+              },
+              icon: Icon(Icons.arrow_back)),
         ),
         body: Stack(
           children: [
@@ -77,13 +88,13 @@ class _TreesDataState extends State<TreesData> {
                     ),
                     Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              width: 200,
-                              height: 30,
+                              width: 150,
+                              height: 60,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   border: Border(
@@ -98,8 +109,8 @@ class _TreesDataState extends State<TreesData> {
                               ),
                             ),
                             Container(
-                              width: 200,
-                              height: 30,
+                              width: 100,
+                              height: 60,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   border: Border(
@@ -139,7 +150,7 @@ class _TreesDataState extends State<TreesData> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                       child: Container(
-                        width: 250,
+                        width: MediaQuery.of(context).size.width * 0.8,
                         height: 30,
                         alignment: Alignment.topCenter,
                         decoration: BoxDecoration(
@@ -151,7 +162,7 @@ class _TreesDataState extends State<TreesData> {
                         child: Text(
                           "คาร์บอนเครดิต : ${tree?.credit}  tCO2eq",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

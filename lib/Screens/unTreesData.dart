@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projcetapp/Screens/editUnTree.dart';
+import 'package:projcetapp/Screens/home.dart';
 import 'package:projcetapp/Services/json_service.dart';
 import 'package:projcetapp/model/untree_model.dart';
 
@@ -36,6 +37,14 @@ class _UnTreeDataState extends State<UnTreeData> {
           toolbarHeight: 50,
           centerTitle: true,
           title: Text("ข้อมูลต้นไม้"),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => homePage()),
+                    (Route<dynamic> rount) => false);
+              },
+              icon: Icon(Icons.arrow_back)),
         ),
         body: Stack(
           children: [
@@ -79,13 +88,13 @@ class _UnTreeDataState extends State<UnTreeData> {
                     ),
                     Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              width: 200,
-                              height: 30,
+                              width: 150,
+                              height: 60,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   border: Border(
@@ -100,8 +109,8 @@ class _UnTreeDataState extends State<UnTreeData> {
                               ),
                             ),
                             Container(
-                              width: 200,
-                              height: 30,
+                              width: 100,
+                              height: 60,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   border: Border(
@@ -141,7 +150,7 @@ class _UnTreeDataState extends State<UnTreeData> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                       child: Container(
-                        width: 250,
+                        width: MediaQuery.of(context).size.width * 0.8,
                         height: 30,
                         alignment: Alignment.topCenter,
                         decoration: BoxDecoration(
@@ -153,7 +162,7 @@ class _UnTreeDataState extends State<UnTreeData> {
                         child: Text(
                           "คาร์บอนเครดิต : ${tree?.credit}  tCO2eq",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                              fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

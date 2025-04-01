@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projcetapp/Model/tree_model.dart';
 import 'package:projcetapp/Screens/editPlot.dart';
+import 'package:projcetapp/Screens/home.dart';
 import 'package:projcetapp/Screens/treeData.dart';
 import 'package:projcetapp/model/plot_model.dart';
 import 'package:projcetapp/Services/json_service.dart';
@@ -50,6 +51,14 @@ class _PlotdatapageState extends State<Plotdatapage> {
         appBar: AppBar(
           centerTitle: true,
           title: Text("ข้อมูลแปลง"),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => homePage()),
+                    (Route<dynamic> rount) => false);
+              },
+              icon: Icon(Icons.arrow_back)),
         ),
         body: Stack(
           children: [
@@ -66,7 +75,7 @@ class _PlotdatapageState extends State<Plotdatapage> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
@@ -86,20 +95,28 @@ class _PlotdatapageState extends State<Plotdatapage> {
                           Padding(
                               padding: EdgeInsets.all(5),
                               child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              EditPlot(pid: pid)));
-                                },
-                                child: Text(
-                                  "${plot?.name}",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 24),
-                                ),
-                              )),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditPlot(pid: pid)));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "${plot?.name}",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 24),
+                                        ),
+                                      )),
+                                      Icon(Icons.settings)
+                                    ],
+                                  ))),
                           Padding(
                               padding:
                                   EdgeInsets.only(top: 3, left: 20, bottom: 10),
@@ -115,15 +132,21 @@ class _PlotdatapageState extends State<Plotdatapage> {
                     ),
                   ),
                   Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Container(
-                        width: 250,
-                        height: 60,
-                        child: ElevatedButton(
+                    padding: EdgeInsets.only(bottom: 5),
+                    child: Container(
+                      width: 250,
+                      height: 60,
+                      child: ElevatedButton(
                           onPressed: () {},
-                          child: Text("เพิ่มข้อมูลต้นไม้"),
-                        ),
-                      )),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("เพิ่มข้อมูลต้นไม้ "),
+                              Icon(Icons.add)
+                            ],
+                          )),
+                    ),
+                  ),
                   Expanded(
                       child: SingleChildScrollView(
                           controller: _scrollController,
@@ -132,38 +155,19 @@ class _PlotdatapageState extends State<Plotdatapage> {
                               trees.isEmpty
                                   ? Container(
                                       height:
-                                          MediaQuery.of(context).size.height -
-                                              200,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.all(5),
-                                            child: Center(
-                                              child: Text(
-                                                "ไม่มีข้อมูลต้นไม้",
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
+                                          MediaQuery.of(context).size.height *
+                                              0.4,
+                                      alignment: Alignment.topCenter,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(5),
+                                        child: Center(
+                                          child: Text(
+                                            "ไม่มีข้อมูลต้นไม้",
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                          Padding(
-                                              padding: EdgeInsets.all(10),
-                                              child: Container(
-                                                width: 250,
-                                                height: 60,
-                                                child: ElevatedButton(
-                                                  onPressed: () {},
-                                                  child:
-                                                      Text("เพิ่มข้อมูลต้นไม้"),
-                                                ),
-                                              ))
-                                        ],
+                                        ),
                                       ),
                                     )
                                   : ListView.builder(
@@ -191,26 +195,35 @@ class _PlotdatapageState extends State<Plotdatapage> {
                                                     BorderRadius.circular(20),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsets.all(15),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      "${index + 1} : "
-                                                      "${item.name}",
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    SizedBox(height: 10),
-                                                    Text(
-                                                        "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(3)} tCO2eq"),
-                                                    SizedBox(height: 5),
-                                                  ],
-                                                ),
-                                              ),
+                                                  padding: EdgeInsets.all(15),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            "${index + 1} : "
+                                                            "${item.name}",
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          SizedBox(height: 10),
+                                                          Text(
+                                                              "คาร์บอนเครดิต : ${item.credit.toStringAsFixed(3)} tCO2eq"),
+                                                          SizedBox(height: 5),
+                                                        ],
+                                                      ),
+                                                      Icon(Icons.arrow_forward)
+                                                    ],
+                                                  )),
                                             ),
                                           ),
                                         );
