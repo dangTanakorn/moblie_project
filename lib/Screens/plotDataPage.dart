@@ -114,6 +114,16 @@ class _PlotdatapageState extends State<Plotdatapage> {
                       ),
                     ),
                   ),
+                  Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Container(
+                        width: 250,
+                        height: 60,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text("เพิ่มข้อมูลต้นไม้"),
+                        ),
+                      )),
                   Expanded(
                       child: SingleChildScrollView(
                           controller: _scrollController,
