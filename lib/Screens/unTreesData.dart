@@ -36,7 +36,6 @@ class _UnTreeDataState extends State<UnTreeData> {
 
   Future<void> loadGroup(int groupId) async {
     group = await jsonService.getGroupById(groupId);
-    print("${group?.name}");
     setState(() {});
   }
 
@@ -190,33 +189,64 @@ class _UnTreeDataState extends State<UnTreeData> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 60, vertical: 10),
-                      child: Container(
-                        height: 50,
-                        alignment: Alignment.center,
-                        child: FilledButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditUnTree(utid: utid)));
-                          },
-                          child: Text(
-                            "แก้ไขข้อมูล",
-                            style: TextStyle(fontSize: 24, color: Colors.black),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                side:
-                                    BorderSide(color: Colors.black, width: 2)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: 10, bottom: 10, left: 10),
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            alignment: Alignment.center,
+                            child: FilledButton(
+                              onPressed: () {},
+                              child: Text(
+                                "ลบต้นไม้",
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.black),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    side: BorderSide(
+                                        color: Colors.black, width: 2)),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: 10, bottom: 10, right: 10),
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            alignment: Alignment.center,
+                            child: FilledButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditUnTree(utid: utid)));
+                              },
+                              child: Text(
+                                "แก้ไขข้อมูล",
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.black),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.transparent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    side: BorderSide(
+                                        color: Colors.black, width: 2)),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     )
                   ],
                 ),

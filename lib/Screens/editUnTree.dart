@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projcetapp/Model/group_model.dart';
 import 'package:projcetapp/Screens/home.dart';
 import 'package:projcetapp/Screens/unTreesData.dart';
 import 'package:projcetapp/Services/json_service.dart';
@@ -19,7 +20,12 @@ class _EditUnTreeState extends State<EditUnTree> {
   final TextEditingController _heightController = TextEditingController();
 
   Untrees? tree;
+  List<Group> groups = [];
+  Group? groupname;
   late int utid;
+  String? selectedValue;
+  bool isLoad = true;
+
   @override
   void initState() {
     super.initState();
@@ -30,10 +36,27 @@ class _EditUnTreeState extends State<EditUnTree> {
 
   Future<void> loadTree(int unTreeId) async {
     tree = await jsonService.getUnTreeByUtid(unTreeId);
+    loadGroup();
+    loadGroupBytree(tree!.id);
     setState(() {
       _nameController.text = tree?.name ?? "";
       _cirController.text = tree?.circumference.toString() ?? "";
       _heightController.text = tree?.height.toString() ?? "";
+    });
+  }
+
+  Future<void> loadGroup() async {
+    List<Group> group = await jsonService.getGroup();
+    setState(() {
+      groups = group;
+      isLoad = false;
+    });
+  }
+
+  Future<void> loadGroupBytree(int id) async {
+    groupname = await jsonService.getGroupById(id);
+    setState(() {
+      selectedValue = groupname?.name;
     });
   }
 
@@ -86,6 +109,27 @@ class _EditUnTreeState extends State<EditUnTree> {
                             style: TextStyle(fontSize: 28),
                           )),
                     ),
+                    Padding(
+                        padding: EdgeInsets.only(left: 10, bottom: 1, top: 1),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          height: 40,
+                          child: DropdownButton(
+                            value: selectedValue,
+                            hint: Text(
+                                "${selectedValue?.isNotEmpty ?? "เลือกกล่ม"}"),
+                            isExpanded: true,
+                            items: groups.map((groups) {
+                              return DropdownMenuItem<String>(
+                                  value: groups.name, child: Text(groups.name));
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                selectedValue = value;
+                              });
+                            },
+                          ),
+                        )),
                     Padding(
                       padding: EdgeInsets.all(2),
                       child: Container(
